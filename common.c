@@ -31,17 +31,8 @@ void input(int n, FILE* fp, int** adj)
         }
     }
 
-    // 인접 행렬 출력
-    /*
-    printf("%d번째 그래프 인접행렬\n", graphIndex);
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= n; j++)
-            printf("%d ", adj[i][j]);
-        printf("\n");
-    }
-    printf("\n");*/
-
     return;
 }
+
 
 #endif
