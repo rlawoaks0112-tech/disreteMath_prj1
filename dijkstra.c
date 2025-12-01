@@ -4,12 +4,12 @@
 #include "common.h"
 
 typedef struct {
-    int dist;  //½ÃÀÛÁ¡(1)ºÎÅÍÀÇ °Å¸®
-    int prev;  //¹æ¹® ÀÌÀü ³ëµå ÀúÀå
-}Path; //³ëµåº° Á¤º¸ ÀúÀå ±¸Á¶Ã¼
+    int dist;  //ì‹œì‘ì (1)ë¶€í„°ì˜ ê±°ë¦¬
+    int prev;  //ë°©ë¬¸ ì´ì „ ë…¸ë“œ ì €ì¥
+}Path; //ë…¸ë“œë³„ ì •ë³´ ì €ì¥ êµ¬ì¡°ì²´
 
 int min_dist(Path path[], int visited[], int n) {
-    //¹æ¹®ÇÏÁö ¾ÊÀº Á¤Á¡ Áß ½ÃÀÛÁ¡°úÀÇ °Å¸®°¡ °¡Àå ÂªÀº Á¡ ¼±ÅÃ
+    //ë°©ë¬¸í•˜ì§€ ì•Šì€ ì •ì  ì¤‘ ì‹œì‘ì ê³¼ì˜ ê±°ë¦¬ê°€ ê°€ì¥ ì§§ì€ ì  ì„ íƒ
 
     int min = INF;
     int min_index = -1;
@@ -27,7 +27,7 @@ void print_path(int start, int target, Path* path) {
         printf("1");
         return;
     }
-    //¿À·ù ¹æÁö
+    //ì˜¤ë¥˜ ë°©ì§€
     if (path[target].prev == -1) return;
 
     print_path(start, path[target].prev, path);
@@ -42,9 +42,9 @@ void Dijkstra(int n, int* visited, int** adj, int** weight, Path* path) {
 
         if (w == -1 || path[w].dist == INF) break;
 
-        visited[w] = 1; //¼±ÅÃµÈ Á¤Á¡À» ¹æ¹®À¸·Î È®Á¤
+        visited[w] = 1; //ì„ íƒëœ ì •ì ì„ ë°©ë¬¸ìœ¼ë¡œ í™•ì •
 
-        //È®Á¤µÈ Á¤Á¡À» Åä´ë·Î ÀÌ Á¡À» °ÅÃÄ °Å¸®°¡ Âª¾ÆÁö´Â Á¤Á¡ °»½Å
+        //í™•ì •ëœ ì •ì ì„ í† ëŒ€ë¡œ ì´ ì ì„ ê±°ì³ ê±°ë¦¬ê°€ ì§§ì•„ì§€ëŠ” ì •ì  ê°±ì‹ 
         for (int j = 0; j < n; j++) {
             if (adj[w][j] != 0) {
                 if (path[w].dist + weight[w][j] < path[j].dist) {
@@ -56,9 +56,9 @@ void Dijkstra(int n, int* visited, int** adj, int** weight, Path* path) {
 
     }
     for (int i = 1; i < n; i++) {
-        printf("Á¤Á¡ [%d] : ", i + 1);
+        printf("ì •ì  [%d] : ", i + 1);
         print_path(0, i, path);
-        printf(", ±æÀÌ: %d\n", path[i].dist);
+        printf(", ê¸¸ì´: %d\n", path[i].dist);
     }
 }
 
@@ -69,10 +69,10 @@ int main_dijkstra() {
     int w;
     int n, graphIndex = 1;
 
-    //¿©±âºÎÅÍ ÆÄÀÏ ÀĞ±â
+    //ì—¬ê¸°ë¶€í„° íŒŒì¼ ì½ê¸°
     fp = fopen("input2.txt", "r");
     if (!fp) {
-        printf("ÆÄÀÏ ¿­±â ½ÇÆĞ- input2\n");
+        printf("íŒŒì¼ ì—´ê¸° ì‹¤íŒ¨- input2\n");
         return 1;
     }
 
@@ -85,19 +85,19 @@ int main_dijkstra() {
 
         for (int i = 0; i < n; i++) {
             for (int j = 1; j <= n; j++) {
-                adj[i][j] = 0; //ÀÎÁ¢Çà·Ä ÃÊ±âÈ­
-                weight[i][j] = 0; //°¡ÁßÄ¡ Çà·Ä ÃÊ±âÈ­
+                adj[i][j] = 0; //ì¸ì ‘í–‰ë ¬ ì´ˆê¸°í™”
+                weight[i][j] = 0; //ê°€ì¤‘ì¹˜ í–‰ë ¬ ì´ˆê¸°í™”
             }
             path[i].dist = INF;
             path[i].prev = -1;
             visited[i] = 0;
         }
 
-        path[0].dist = 0; //½ÃÀÛÁ¡°úÀÇ °Å¸®´Â 0
+        path[0].dist = 0; //ì‹œì‘ì ê³¼ì˜ ê±°ë¦¬ëŠ” 0
 
-        // ±×·¡ÇÁ Á¤º¸ ÀĞ±â(ÀÎÁ¢ Çà·Ä »ı¼º)
+        // ê·¸ë˜í”„ ì •ë³´ ì½ê¸°(ì¸ì ‘ í–‰ë ¬ ìƒì„±)
         for (int i = 0; i < n; i++) {
-            fscanf(fp, "%d", &v);   // °¢ ÁÙÀÇ Ã¹ ¹øÂ°´Â Á¤Á¡ ¹øÈ£
+            fscanf(fp, "%d", &v);   // ê° ì¤„ì˜ ì²« ë²ˆì§¸ëŠ” ì •ì  ë²ˆí˜¸
             
             while (1) {
 
@@ -108,7 +108,7 @@ int main_dijkstra() {
                 if (c == '\n' || c == EOF) break;
                 ungetc(c, fp);
 
-                fscanf(fp, "%d", &u); // ÀÎÁ¢ Á¤Á¡ ¹øÈ£ ÀĞ±â
+                fscanf(fp, "%d", &u); // ì¸ì ‘ ì •ì  ë²ˆí˜¸ ì½ê¸°
 
 
                 c = fgetc(fp);
@@ -118,7 +118,7 @@ int main_dijkstra() {
                 if (c == '\n' || c == EOF) break;
                 ungetc(c, fp);
 
-                fscanf(fp, "%d", &w); // °¡ÁßÄ¡ ÀĞ±â
+                fscanf(fp, "%d", &w); // ê°€ì¤‘ì¹˜ ì½ê¸°
                     
 
                 adj[v - 1][u - 1] = 1;
@@ -126,24 +126,8 @@ int main_dijkstra() {
                 //printf("check1\n");
             }
         }
-        //n¹ø ±×·¡ÇÁ ÀÔ·Â Á¾·á
-        /*
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                printf("%3d ", adj[i][j]);
-            }
-            printf("\n");
-        }
-        printf("\n");
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                printf("%3d ", weight[i][j]);
-            }
-            printf("\n");
-        }
-        printf("\n");
-        */
+        //ê·¸ë˜í”„ ì…ë ¥ ì¢…ë£Œ
+        
 
         printf("\n\ngraph %d : \n",graphIndex);
         Dijkstra(n, visited, adj, weight, path);
@@ -160,3 +144,4 @@ int main_dijkstra() {
 
     return 0;
 }
+
