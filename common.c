@@ -1,10 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
-#ifndef COMMON_H
-#define COMMON_H
 #include<stdio.h>
 #include <stdlib.h>
-
-#define INF 2<<31 - 1
+#include "common.h"
 
 int** allocateMemory(int n)
 {
@@ -19,5 +16,3 @@ void releaseMemory(int** p, int n)
         free(p[i]);
     free(p);
 }
-#endif
-
