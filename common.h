@@ -8,6 +8,5 @@
 
 int** allocateMemory(int n);
 void releaseMemory(int** p, int n);
-void input(int n, FILE* fp, int** adj);
 
 #endif
