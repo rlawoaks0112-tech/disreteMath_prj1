@@ -13,21 +13,21 @@ int main()
 
     //----------------------bfs,dfs------------------------
     
-    //ÆÄÀÏ °æ·Î
+    //íŒŒì¼ ê²½ë¡œ
     fp = fopen("input1.txt", "r");
     if (!fp) {
-        printf("ÆÄÀÏ ¿­±â ½ÇÆĞ - input1\n");
+        printf("íŒŒì¼ ì—´ê¸° ì‹¤íŒ¨ - input1\n");
         goto jumpToDijkstra;
     }
-
+    printf("1. ê·¸ë˜í”„ íƒë°© ìˆ˜í–‰ ê²°ê³¼\n\n");
     while (fscanf(fp, "%d", &n) == 1) 
     {
-        //±×·¡ÇÁ°¡ ¿©·¯°³ÀÏ ¼ö ÀÖÀ½; ¼ıÀÚ ¾È³ª¿Ã¶§±îÁö ¹«ÇÑ¹İº¹
-        //Çà·Ä ÃÊ±âÈ­
+        //ê·¸ë˜í”„ê°€ ì—¬ëŸ¬ê°œì¼ ìˆ˜ ìˆìŒ; ìˆ«ì ì•ˆë‚˜ì˜¬ë•Œê¹Œì§€ ë¬´í•œë°˜ë³µ
+        //í–‰ë ¬ ì´ˆê¸°í™”
         visited = (int*)calloc(n + 1, sizeof(int));
         adj = allocateMemory(n + 1);
 
-        // ±×·¡ÇÁ Á¤º¸ ÀĞ±â(ÀÎÁ¢ Çà·Ä »ı¼º) ¹× Ãâ·Â(È®ÀÎ¿ë)
+        // ê·¸ë˜í”„ ì •ë³´ ì½ê¸°(ì¸ì ‘ í–‰ë ¬ ìƒì„±) ë° ì¶œë ¥(í™•ì¸ìš©)
         int v, u;
         for (int i = 1; i <= n; i++) {
             fscanf(fp, "%d", &v);
@@ -46,14 +46,16 @@ int main()
         }
 
 
-        //ÇÔ¼ö »ç¿ëÇØ¼­ dfs, bfs °è»ê
-        printf("\nbfs for graph [%d] : ",graphIndex);
-        bfs(1, n, visited, adj);
-
-        memset(visited, 0, sizeof(int) * (n + 1)); // ¹æ¹® ¿©ºÎ ÃÊ±âÈ­
-        printf("\ndfs for graph [%d] : ",graphIndex);
+        //í•¨ìˆ˜ ì‚¬ìš©í•´ì„œ dfs, bfs ê³„ì‚°
+        printf("ê·¸ë˜í”„ [%d]\n", graphIndex);
+        printf("---------------------------- \n");
+        printf("ê¹Šì´ ìš°ì„  íƒìƒ‰\n");
         dfs(1, n, visited, adj);
 
+        memset(visited, 0, sizeof(int) * (n + 1)); // ë°©ë¬¸ ì—¬ë¶€ ì´ˆê¸°í™”
+        printf("\në„ˆë¹„ ìš°ì„  íƒìƒ‰\n",graphIndex);
+        bfs(1, n, visited, adj);
+        printf("\n============================");
         printf("\n\n");
         graphIndex++;
 
@@ -65,7 +67,7 @@ int main()
     
     //----------------------dijkstra---------------------
 jumpToDijkstra:
-    printf("\ndijkstra:");
+    printf("2. ìµœë‹¨ ê²½ë¡œ êµ¬í•˜ê¸° ìˆ˜í–‰ ê²°ê³¼");
     main_dijkstra();
 
 }
