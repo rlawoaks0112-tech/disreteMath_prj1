@@ -19,20 +19,5 @@ void releaseMemory(int** p, int n)
         free(p[i]);
     free(p);
 }
-void input(int n, FILE* fp, int** adj)
-{
-    int v, u;
-    for (int i = 1; i <= n; i++) {
-        fscanf(fp, "%d", &v);
-        while (fscanf(fp, "%d", &u) == 1) {
-            adj[v][u] = 1;
-            int c = fgetc(fp);
-            if (c == '\n' || c == EOF) break;
-        }
-    }
-
-    return;
-}
-
-
 #endif
+
