@@ -126,11 +126,12 @@ int main_dijkstra() {
                 //printf("check1\n");
             }
         }
-        //그래프 입력 종료
-        
+        //입력 종료
 
-        printf("\n\ngraph %d : \n",graphIndex);
+        printf("\n\n그래프 [%d]\n",graphIndex);
+        printf("----------------------------\n시작점: 1\n");
         Dijkstra(n, visited, adj, weight, path);
+        printf("=========================\n");
         graphIndex++;
 
         releaseMemory(weight, n);
@@ -144,4 +145,3 @@ int main_dijkstra() {
 
     return 0;
 }
-
